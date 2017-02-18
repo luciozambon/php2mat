@@ -1,7 +1,5 @@
 # php2mat
-export data (arrays) from PHP to MAT format
-
-save php data in a MATLAB® binary file
+php2mat exports data (arrays) from PHP to MAT format i.e. MATLAB® binary file
 based on Release 14SP3 of:
 
 http://www.mathworks.com/access/helpdesk/help/pdf_doc/matlab/matfile_format.pdf
@@ -35,10 +33,14 @@ $php2mat->SendFile() after having loaded all data.
 require($your_path.'php2mat.php');
 $php2mat = new php2mat();
 $php2mat->php2mat5_head('test.mat', "<my_text>");
-$res = mysqli_query($db, 'SELECT value FROM table');
-$php2mat->php2mat5_var_init('variable_name', 1, mysqli_num_rows($res));
+$res = mysqli_query($db, 'SELECT value1 FROM table');
+$php2mat->php2mat5_var_init('variable_name', 2, mysqli_num_rows($res));
 while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
-    $php2mat->php2mat5_var_addrow($row['value']);
+    $php2mat->php2mat5_var_addrow($row['value1']);
+}
+$res = mysqli_query($db, 'SELECT value2 FROM table');
+while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+    $php2mat->php2mat5_var_addrow($row['value2']);
 }
 ```
 
